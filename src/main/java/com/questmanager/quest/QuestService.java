@@ -2,36 +2,47 @@
 // Controller - DB 사이 연결
 package com.questmanager.quest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import com.questmanager.quest.QuestRepository;
 
 //@Service로 Spring이 자동 관리
 @Service
 public class QuestService {
+    @Autowired
+    private QuestRepository questRepository;
+
+
+    public List<QuestDefinition> getAllQuests() {
+      return questRepository.findAll();
+    }
+
+    // Optional은 값이 있을수도 있고 없을수도 있는 객체를 감싸는 래퍼 클래스
+    public Optional<QuestDefinition> getQuestById(Integer questId) {return questRepository.findById(questId); }
+
     // Data Store
     // 임시로 메모리에 저장
-    private Map<Integer, QuestDefinition> quests = new HashMap<>();
+//    private Map<Integer, QuestDefinition> quests = new HashMap<>();
 
-    public QuestService() {
-        initQuests();
-    }
+//    public QuestService() {
+//        initQuests();
+//    }
 
-    private void initQuests() {
-        quests.put(1, new QuestDefinition(
-                1, "Defeat Goblins", "Get 10 Goblins", 1, 100, 50, 10
-        ));
-    }
+//    private void initQuests() {
+//        quests.put(1, new QuestDefinition(
+//                1, "Defeat Goblins", "Get 10 Goblins", 1, 100, 50, 10
+//        ));
+//    }
 
     // 조회 메서드
-    public List<QuestDefinition> getAllQuests() {
-        return new ArrayList<>(quests.values());
-    }
+//    public List<QuestDefinition> getAllQuests() {
+//        return new ArrayList<>(quests.values());
+//    }
 
-    public QuestDefinition getQuestById(int questId) {
-        return quests.get(questId);
-    }
+//    public QuestDefinition getQuestById(int questId) {
+//        return quests.get(questId);
+//    }
 }

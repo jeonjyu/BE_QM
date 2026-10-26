@@ -1,7 +1,15 @@
 package com.questmanager.quest;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table
 public class QuestDefinition {
 
+    public QuestDefinition() {}
     public QuestDefinition(int id, String name, String description, int requiredLevel, int goldReward, int experienceReward, int progressMax) {
         this.id = id;
         this.name = name;
@@ -12,14 +20,14 @@ public class QuestDefinition {
         this.progressMax = progressMax;
     }
 
-    private final int id;
-    private final String name;
-    private final String description;
-    private final int requiredLevel;
-    private final int goldReward;
-    private final int experienceReward;
-    private final int progressMax;
-
+    @Id
+    private int id;
+    private String name;
+    private String description;
+    private int requiredLevel;
+    private int goldReward;
+    private int experienceReward;
+    private int progressMax;
 
     public int getId() {
         return id;

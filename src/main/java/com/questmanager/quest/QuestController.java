@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import com.questmanager.quest.dto.QuestResponse;
 import java.util.List;
+import java.util.Optional;
 
 // 클래스가 웹 요청을 처리하고 반환값을 응답 본문으로 제공하도록 함
 @RestController
@@ -42,9 +43,9 @@ public class QuestController{
     // 반환 데이터가 복잡해지면 다른 메서드로 체이닝해서 반환한다
     @GetMapping("/api/quests/{questId}")
     public ResponseEntity<?> getQuestById(@PathVariable int questId) {
-        QuestDefinition def = questService.getQuestById(questId);
+        Optional<QuestDefinition> def = questService.getQuestById(questId);
 
-        if(def == null)
+        if(def.isEmpty())
             return ResponseEntity.notFound().build();
         else
             return ResponseEntity.ok(def);
